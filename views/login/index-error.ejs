@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+    </head>
+    <!--===============Script ==========-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    <%if(errData!=""){%>
+        <script>$(document).ready(function(){
+            Swal.fire({type:'error',title:"Oops!!",text:'<%=errData%>'});
+                      });</script>
+  <%}%>
+    
+    
+    
+    
+    <script>
+            function nlink()
+        {
+            location.replace("/signUp");
+        }
+    </script>
+    <body>
+        <form action="/login" method="POST">
+            <fieldset style="width:400px;margin-left:450px;margin-top:200px;border-radius:5px" >
+                <legend><h2 style="color: darkcyan"><i>Login</i></h2></legend>
+                <table>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="text" placeholder="example@domain.com" name="email" required="email"></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="password" name="password" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="submit" name="login" value="Log In"></td>
+                    </tr>
+                    <tr>
+                        <td>Don't have an account?</td>
+                        <td><input type="button" name="register" value="Registration Now" onclick="nlink()"></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </body>
+</html>

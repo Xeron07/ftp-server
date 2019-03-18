@@ -13,6 +13,20 @@ module.exports = {
 			}
 		});
 	},
+    
+    // if the email is used by another user...
+    isOldUser:function(email,callback){
+         var sql="select * from user where email='"+email+"'";  
+        db.getResults(sql, function(result){
+
+			if(result.length >0){
+				callback(result[0]);
+			}else{
+				callback([]);
+			}
+		});
+       
+    },
 	getAll: function(callback){
 		var sql = "select * from user";
 		db.getResults(sql, function(results){
@@ -24,12 +38,18 @@ module.exports = {
 		db.getResults(sql, function(result){
 
 			if(result.length > 0 ){
-				callback(result[0]);
+				callback(true);
 			}else{
-				callback([]);
+				callback(false);
 			}
 		})
 	},
+    addUser:function(user,callback){
+        var sql = "insert into user values(null, '"+ user.uname+"','"+ user.email+"', '"+ user.pass+"','"+ user.dob+"','"+ user.gender+"','"+ user.phn+"', '"+ user.type+"')"
+		db.execute(sql, function(success){
+			callback(success);
+		});
+    },
 	insert: function(user, callback){
 		var sql = "insert into user values(null, '"+ user.uname+"', '"+ user.password+"', '"+ user.type+"')"
 		db.execute(sql, function(success){

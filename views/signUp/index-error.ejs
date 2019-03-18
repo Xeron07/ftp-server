@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sign Up</title>
+    </head>
+    <!--===============Script ==========-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>      
+ 
+    
+    <%if(errData!=""){%>
+          <script>$(document).ready(function(){
+              Swal.fire({type:'error',title:"Oops!!",text:'<%=errData%>'});
+                        });</script>
+    <%}%>
+    <script>
+        function limit(element)
+{
+    var max_chars = 8;
+    var x;
+    if(element.value.length > max_chars) {
+        document.getElementById('ph').value=x;
+        alert("please enter 8 digit only");
+    }
+   
+}
+        function nlink()
+        {
+            location.replace("/login");
+            
+        }
+    </script>
+    <body>
+        
+        <form action="/signUp", method="POST">
+            <fieldset style="width:400px;margin-left:450px;margin-top:100px;border-radius:5px">
+                <legend><h2 style="color: darkcyan"><i>Registration</i></h2></legend>
+                <table>
+                    <tr>
+                        <td>First Name</td>
+                        <td><input type="text" id="f" placeholder="" name="fName" size="27" required></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td><input type="text" name="lName" size="27" required></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="text" name="email" size="27" required="email"></td>
+                    </tr>
+                     <tr>
+                        <td>Phone Number</td>
+                        <td>
+                            <select name="ph1" required>
+                                <option>015</option>
+                                <option>016</option>
+                                <option>017</option>
+                                <option>018</option>
+                                <option>019</option>
+                            </select><input type="number" name="ph2" max="99999999" id="ph" size="7" onkeyup="limit(this)" required></td>
+                    </tr>
+                     <tr>
+                        <td>Password</td>
+                        <td><input type="password" name="password" size="27" required></td>
+                    </tr>
+                     <tr>
+                        <td>Confirm Password</td>
+                        <td><input type="password" name="cp" size="27" required></td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td><input type="radio" name="gender" value="Male">Male
+                            <input type="radio" name="gender" value="Female">Female
+                            <input type="radio" name="gender" value="Other">Other
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Date of Birth</td>
+                        <td><input type="date" name="dob" size="27" required></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Register" name="signup">&nbsp;&nbsp;
+                            <input type="reset" value="Reset" name="reset"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Already have an account?</td>
+                        <td><input type="button" name="login" value="Login" onclick="nlink()"></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </body>
+</html>
