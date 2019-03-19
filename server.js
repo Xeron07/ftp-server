@@ -30,15 +30,27 @@ app.use('/dataHouse', express.static('dataHouse'))
 //ROUTES
 app.get('/',login);
 app.post("/home",home);
+
 app.post("/deleteFile",(req,res)=>{
    var filePath=__dirname+"\\dataHouse\\"+req.session.uid+"\\"+req.body.fName;
    fs.unlinkSync(filePath, function (err) {
     if (err) {
+			console.log("ïn12");
 		res.json({success:false});
 	};
-    // if no error, file has been deleted successfully
-	res.json({success:true});
+		// if no error, file has been deleted successfully
+		console.log("ïn");
+	
 }); 
+res.json({ success: true });
+});
+
+app.post("/createFolder",(req,res)=>{
+	var dir=__dirname+"\\dataHouse\\"+req.session.uid+"\\"+req.body.dirName;
+	if (!fs.existsSync(dir)){
+		fs.mkdirSync(dir);
+}
+res.json({ success: true });
 });
 
 

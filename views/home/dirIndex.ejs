@@ -37,9 +37,9 @@
       <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="tooltip" title="Upload"><i class="fas fa-upload"></i></a>
       </li>
-      <li class="nav-item" onclick="createFolder()">
+      <!-- <li class="nav-item" onclick="createFolder()">
         <a class="nav-link" href="#" data-toggle="tooltip" title="Create Folder"><i class="fas fa-folder-plus"></i></a>
-      </li>
+      </li> -->
       <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="tooltip" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
       </li>
@@ -157,7 +157,7 @@
                     "</div>",
              timer:5000,
              onBeforeOpen:()=>{
-              Swal.showLoading();
+                Swal.showLoading();
               const content = Swal.getContent();
               const $ = content.querySelector.bind(content);
               var p=$("#progressing");

@@ -32,6 +32,24 @@ router.get("/",(req,res)=>{
        res.render("home/index",data);
 });
 
+router.get("/:name",(req,res)=>{
+  pathString=path.dirname("../")+"/dataHouse/"+req.session.uid+"/"+req.params.name+"/";   
+ var filesArray=[];
+ var fi=0;
+ console.log(req.session.uid);
+ var dirs=getDirectories(pathString);
+ fs.readdirSync(pathString).forEach(file => {
+  filesArray[fi]=file;
+  fi++;
+});
+console.log(dirs);
+var data={
+      files:filesArray,
+      dirs:dirs
+};
+ res.render("home/dirIndex",data);
+});
+
 router.get("/download/:name",(req,res,next)=>{
 	var pathString2=pathString+"/"+req.params.name;
 	console.log(pathString2);
