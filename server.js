@@ -2,11 +2,13 @@
 var express  		= require('express');
 var login 			= require('./controller/login');
 var signUp 			= require('./controller/signUp');
-//var home 			= require('./controller/home');
+var home 			= require('./controller/home');
 //var logout 			= require('./controller/logout');
 var bodyParser 		= require('body-parser');
 var exSession 		= require('express-session');
 var cookieParser 	= require('cookie-parser');
+var path=require("path");
+var fs= require("fs");
 var app 			= express();
 
 
@@ -20,12 +22,24 @@ app.use(exSession({secret: 'my top secret', saveUninitialized: true, resave: fal
 app.use(cookieParser());
 app.use('/login', login);
 app.use('/signUp', signUp);
-//app.use('/home', home);
+app.use('/home', home);
 //app.use('/logout', logout);
-app.use('/assets', express.static('ext'))
+app.use('/ext', express.static('ext'));
+app.use('/dataHouse', express.static('dataHouse'))
 
 //ROUTES
 app.get('/',login);
+app.post("/home",home);
+app.post("/deleteFile",(req,res)=>{
+   var filePath=__dirname+"\\dataHouse\\"+req.session.uid+"\\"+req.body.fName;
+   fs.unlinkSync(filePath, function (err) {
+    if (err) {
+		res.json({success:false});
+	};
+    // if no error, file has been deleted successfully
+	res.json({success:true});
+}); 
+});
 
 
 //SERVER STARTUP

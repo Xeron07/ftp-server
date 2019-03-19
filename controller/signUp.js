@@ -1,6 +1,8 @@
 var express= require("express");
 var userModel = require.main.require('./model/user-model');
 var router= express.Router();
+var path=require("path");
+var fs= require("fs");
 
 var errData="";
 
@@ -38,7 +40,15 @@ router.post("/",function(req,res){
                 
                 console.log(user);
               userModel.addUser(user,function(result){
-                  res.redirect("/login");
+                   userModel.getLastId(function(result){
+                    var dir=path.dirname("../")+"/dataHouse/"+result.lid;
+                    console.log(dir);
+                    if (!fs.existsSync(dir)){
+                        fs.mkdirSync(dir);
+                    }
+                    res.redirect("/login");
+                   });
+                
                });
              }
          else{

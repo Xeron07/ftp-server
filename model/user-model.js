@@ -13,6 +13,12 @@ module.exports = {
 			}
 		});
 	},
+	getLastId:function(callback){
+		  var sql="select max(id) as lid from user";
+		  db.getResults(sql, function(result){
+				callback(result[0]);
+		});
+	},
     
     // if the email is used by another user...
     isOldUser:function(email,callback){
@@ -34,13 +40,13 @@ module.exports = {
 		});
 	},
 	validate: function(user, callback){
-		var sql = "select * from user where username='"+user.uname+"' and password='"+user.password+"'";
+		var sql = "select * from user where email='"+user.uname+"' and password='"+user.password+"'";
 		db.getResults(sql, function(result){
-
 			if(result.length > 0 ){
-				callback(true);
+				
+				callback(result[0]);
 			}else{
-				callback(false);
+				callback([]);
 			}
 		})
 	},

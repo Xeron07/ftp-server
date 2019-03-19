@@ -12,9 +12,10 @@ router.post("/",function(req,res){
         password:req.body.password
     };
     userModel.validate(user,function(result){
-          if(result)
+          if(result!=[])
           {
-              res.redirect("/signUp");
+              req.session.uid=result.id;
+              res.redirect("/home");
           }
           else{
               errMsg="Wrong email or password";
